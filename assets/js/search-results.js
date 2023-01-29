@@ -173,7 +173,7 @@ function makingQueryDATA() {
 
 
 //going flight
-function onewayDATA() {
+ function onewayDATA() {
   let FetchHEADER = token_type + " " + accessToken;
   let requestUrlgoing = "https://api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + DEiatacode + "&destinationLocationCode=" + ARiatacode + "&departureDate=" + DEdateforquery + "&adults=" + passenager + "&travelClass=" + selectedClass + "&nonStop=false&max=250";
 
@@ -222,14 +222,21 @@ function finalURL() {
   return Promise.all([DEgetIATAcodeDATA(), ARgetIATAcodeDATA(), makingQueryDATA()]).then(setTimeout(() => { choosingWAY() }, 1000));
 }
 
-function choosingWAY() {
-  if (ways === "ONEWAY") {
-    onewayDATA();
+// the settimeout has to be used for fetching time of IATA CODES
 
+function choosingWAY() {
+  
+  if (ways === "ONEWAY") {
+    Promise.all([onewayDATA()]).then(setTimeout(() => {goingNEXTpage()}, 2000));
   }
 
   if (ways === "RETURN") {
-    onewayDATA();
-    returnDATA();
+    Promise.all([onewayDATA(),returnDATA()]).then(setTimeout(() => { goingNEXTpage()}, 2000));
   }
+
+}
+
+
+function goingNEXTpage() {
+ window.location.href = "./flight-results.html";
 }
