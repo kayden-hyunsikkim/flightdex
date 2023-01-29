@@ -225,7 +225,7 @@ function finalURL() {
 function choosingWAY() {
   
   if (ways === "ONEWAY") {
-    Promise.all([onewayDATA()]).then(setTimeout(() => {goingNEXTpage()}, 2500));
+    Promise.all([onewayDATA()]).then(setTimeout(() => {goingNEXTpage()}, 3000));
   }
 
   if (ways === "RETURN") {
