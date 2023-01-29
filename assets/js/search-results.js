@@ -25,7 +25,15 @@ let passenager = " ";
 let ways = " ";
 
 
+// reload page to initial all inputs
+if (self.name != 'reload') {
+  self.name = 'reload';
+  self.location.reload(true);
+}
+else self.name = '';
 
+//clearing old data in localstorage
+localStorage.clear();
 
 
 // fetching currency API
