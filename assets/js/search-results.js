@@ -125,6 +125,7 @@ function ARgetIATAcodeDATA() {
 search.addEventListener("click", finalURL); // it runs when the toggle switch btn clicked
 
 
+
 // making querydata function (date,seatclass,oneway or return)
 function makingQueryDATA() {
   const traveldate = localStorage.getItem("date")
