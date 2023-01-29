@@ -102,7 +102,6 @@ function DEgetIATAcodeDATA() {
 // getting arrival IATA code from finding cityname API 
 function ARgetIATAcodeDATA() {
   let FetchHEADER = token_type + " " + accessToken;
-
   let DErequestUrl = "https://api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=" + arrival.value.toUpperCase() + "&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL";
 
   fetch(DErequestUrl, {
@@ -197,7 +196,6 @@ function makingQueryDATA() {
 // return flight
 function returnDATA() {
   let FetchHEADER = token_type + " " + accessToken;
-  let ARIATA = localStorage.getItem("ARiatacode");
   let requestUrlreturn = "https://api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + ARiatacode + "&destinationLocationCode=" + DEiatacode + "&departureDate=" + ARdateforquery + "&adults=" + passenager + "&travelClass=" + selectedClass + "&nonStop=false&max=250";
 
   fetch(requestUrlreturn, {
