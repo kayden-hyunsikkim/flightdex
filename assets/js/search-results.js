@@ -229,7 +229,7 @@ function choosingWAY() {
   }
 
   if (ways === "RETURN") {
-    Promise.all([onewayDATA(),returnDATA()]).then(setTimeout(() => { goingNEXTpage()}, 3000));
+    Promise.all([onewayDATA(),returnDATA()]).then(setTimeout(() => { goingNEXTpage()}, 4000));
   }
 
 }
