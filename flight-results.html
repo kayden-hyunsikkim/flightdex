@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bulma  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!--Linked CSS-->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    
+    <title>FlightDex Flight Results</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="title has-text-centered">Welcome to FlightDex! </h1>
+      <h2 class="subtitle has-text-centered">Your #1 Flight, Event & Hotel searcher! </h2>
+      <p class="subtitle" id="results-subtitle">The best flight results for:</p>
+    </header>
+
+    <!--Results for flights will display here-->
+    <div id="result">
+      <div id="slider">
+        <p>Add a price range with the slider below!</p>
+        <input id="sliderWithValue" class="slider has-output-tooltip is-fullwidth" min="0" max="1000"  step="1" type="range">
+      </div>
+      
+      <!--Need to add a sort by feature-->
+
+      <!--Flights to the destination-->
+      <div id="togodiv" class="box">
+        <h3 class="subtitle">Flights from</h3>
+        <h3 class="title is-5" id="location-to"></h3>
+        <div id="destination-results" class="columns is-multiline">
+          <div class="column is-2 has-text-weight-bold">
+            <p>Departure City</p>
+          </div>
+          <div class="column is-2 has-text-weight-bold">
+            <p>Arrival City</p>
+          </div>
+          <div class="column is-2 has-text-weight-bold">
+            <p>Depart Time</p>
+          </div>
+          <div class="column is-2 has-text-weight-bold">
+            <p>Arrive Time</p>
+          </div>
+          <div class="column is-1 has-text-weight-bold">
+            <p>Class</p>
+          </div>
+          <div class="column is-1 has-text-weight-bold">
+            <p>Cost</p>
+          </div>
+          <div class="column is-1 has-text-weight-bold">
+            <p>Passengers</p>
+          </div>
+        </div>
+      </div>
+      
+      <!--Flights from the destination-->
+      <div id="returndiv" class="box">
+        <h3 class="subtitle">Flights from</h3>
+        <h3 class="title is-5" id="location-from"></h3>
+        <div class="columns" id="arrival-results">
+          <div class="column is-2 has-text-weight-bold">
+            <p>Departure City</p>
+          </div>
+          <div class="column is-2 has-text-weight-bold">
+            <p>Depart Time</p>
+          </div>
+          <div class="column is-2 has-text-weight-bold">
+            <p>Arrival City</p>
+          </div>
+          <div class="column is-2 has-text-weight-bold">
+            <p>Arrival Time</p>
+          </div>
+          <div class="column is-1 has-text-weight-bold">
+            <p>Class</p>
+          </div>
+          <div class="column is-1 has-text-weight-bold">
+            <p>Cost</p>
+          </div>
+          <div class="column is-1 has-text-weight-bold">
+            <p>Passengers</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--Link JS file-->
+    <script src="./assets/js/showingsearchedData.js"></script>
+  </body>
+</html>
