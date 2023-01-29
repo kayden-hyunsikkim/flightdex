@@ -7,10 +7,10 @@ const economy = document.querySelector('#economy');
 const search = document.querySelector("#search");
 
 
-let departurecityname  = ' ';
-let arrivalcityname  = ' ';
-let finalGoingdata  = { };
-let finalreturndata  = { };
+let departurecityname = ' ';
+let arrivalcityname = ' ';
+let finalGoingdata = {};
+let finalreturndata = {};
 
 
 
@@ -51,26 +51,26 @@ fetch(`${api}`)
 // generate new access-token whenever app starts 
 // if user stays in search page(index page) for more than 20 mins, it will generated new access-token
 
-  const TOKENUrl = "https://api.amadeus.com/v1/security/oauth2/token"
+const TOKENUrl = "https://api.amadeus.com/v1/security/oauth2/token"
 
-  fetch(TOKENUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: 'grant_type=client_credentials&client_id=FgVXIVlEeBmSHOG5GhRdPceveA3CExUw&client_secret=IGDvlEYHGKe0dUiI'
-  }).then(function (response) {
-    return response.json();
-  })
-    .then(function (data) {
-      token_type = data.token_type;
-      accessToken = data.access_token;
-      //ARgetIATAcodeDATA(data);
-      console.log(token_type);
-      console.log(accessToken);
-    });
+fetch(TOKENUrl, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: 'grant_type=client_credentials&client_id=FgVXIVlEeBmSHOG5GhRdPceveA3CExUw&client_secret=IGDvlEYHGKe0dUiI'
+}).then(function (response) {
+  return response.json();
+})
+  .then(function (data) {
+    token_type = data.token_type;
+    accessToken = data.access_token;
+    //ARgetIATAcodeDATA(data);
+    console.log(token_type);
+    console.log(accessToken);
+  });
 
-  arrival.addEventListener("click", DEgetIATAcodeDATA);
+
 
 // getting departure IATA code from finding cityname API 
 function DEgetIATAcodeDATA() {
@@ -96,7 +96,7 @@ function DEgetIATAcodeDATA() {
 }
 
 
-people.addEventListener("click", ARgetIATAcodeDATA);
+
 
 
 // getting arrival IATA code from finding cityname API 
@@ -122,7 +122,9 @@ function ARgetIATAcodeDATA() {
 }
 
 
-search.addEventListener("click", makingQueryDATA); // it runs when the toggle switch btn clicked
+search.addEventListener("click", finalURL); // it runs when the toggle switch btn clicked
+
+
 
 // making querydata function (date,seatclass,oneway or return)
 function makingQueryDATA() {
@@ -162,21 +164,10 @@ function makingQueryDATA() {
   localStorage.setItem('PASSENAGERvalue', passenager);
   console.log(passenager);
 
- 
-  choosingWAY();
+
 }
 
-  function choosingWAY() {
-  if (ways === "ONEWAY") {
-    onewayDATA();
 
-  }
-
-  if (ways === "RETURN") {
-    onewayDATA();
-    returnDATA();
-  }
-}
 
 
 
@@ -184,9 +175,7 @@ function makingQueryDATA() {
 //going flight
 function onewayDATA() {
   let FetchHEADER = token_type + " " + accessToken;
-  let deIatacode = localStorage.getItem("departurecitycode")
-  console.log(deIatacode)
-  let requestUrlgoing = "https://api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + deIatacode + "&destinationLocationCode=" + ARiatacode + "&departureDate=" + DEdateforquery + "&adults=" + passenager + "&travelClass=" + selectedClass + "&nonStop=false&max=250";
+  let requestUrlgoing = "https://api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + DEiatacode + "&destinationLocationCode=" + ARiatacode + "&departureDate=" + DEdateforquery + "&adults=" + passenager + "&travelClass=" + selectedClass + "&nonStop=false&max=250";
 
   fetch(requestUrlgoing, {
     headers: { Authorization: FetchHEADER }
@@ -200,7 +189,8 @@ function onewayDATA() {
 
       finalGoingdata = data;
       localStorage.setItem('finalGoingdata', JSON.stringify(finalGoingdata));
-      setInterval(goingNextpage, 5000);
+      console.log(DEiatacode);
+      console.log(ARiatacode);
     });
   setInterval(goingNextpage)
 }
@@ -208,9 +198,8 @@ function onewayDATA() {
 // return flight
 function returnDATA() {
   let FetchHEADER = token_type + " " + accessToken;
-  let deIatacode = localStorage.getItem("departurecitycode");
-  console.log(deIatacode);
-  let requestUrlreturn = "https://api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + ARiatacode + "&destinationLocationCode=" + deIatacode + "&departureDate=" + ARdateforquery + "&adults=" + passenager + "&travelClass=" + selectedClass + "&nonStop=false&max=250";
+  let ARIATA = localStorage.getItem("ARiatacode");
+  let requestUrlreturn = "https://api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + ARiatacode + "&destinationLocationCode=" + DEiatacode + "&departureDate=" + ARdateforquery + "&adults=" + passenager + "&travelClass=" + selectedClass + "&nonStop=false&max=250";
 
   fetch(requestUrlreturn, {
     headers: { Authorization: FetchHEADER }
@@ -223,19 +212,25 @@ function returnDATA() {
       console.log(data);
       finalreturndata = data;
       localStorage.setItem('finalreturndata', JSON.stringify(finalreturndata));
+      console.log(DEiatacode);
+      console.log(ARiatacode);
     });
 
 }
 
 
-
-
-//going next page function
-function goingNextpage() {
-  window.location.href = "./flight-results.html";
+function finalURL() {
+  return Promise.all([DEgetIATAcodeDATA(), ARgetIATAcodeDATA(), makingQueryDATA()]).then(setTimeout(() => { choosingWAY() }, 1000));
 }
 
+function choosingWAY() {
+  if (ways === "ONEWAY") {
+    onewayDATA();
 
-timeInterval = setInterval(() => {
-  window.location.reload();
-}, 900000) // the token will be generated every 20mins - if you want to test it, change the number to 10000 then will be generated every 10 second
+  }
+
+  if (ways === "RETURN") {
+    onewayDATA();
+    returnDATA();
+  }
+}
