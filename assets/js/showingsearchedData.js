@@ -511,12 +511,12 @@ function SortingbyPRICEonewaytickets() {
             Passenagerdiv.setAttribute("class", "column is-1");
 
 
-            departurecity.textContent = departurecityname + " (" + finalGoingdata.data[i].itineraries[0].segments[0].departure.iataCode + ")";
-            arrivalcity.textContent = arrivalcityname + " (" + finalGoingdata.data[i].itineraries[0].segments[0].arrival.iataCode + ")";
-            DEtime.textContent = finalGoingdata.data[i].itineraries[0].segments[0].departure.at;
-            ARtime.textContent = finalGoingdata.data[i].itineraries[0].segments[0].arrival.at;
-            flightclass.textContent = finalGoingdata.data[i].travelerPricings[0].fareDetailsBySegment[0].cabin;
-            let AUDprice = currencydata.rates.AUD * finalGoingdata.data[i].price.total;
+            departurecity.textContent = departurecityname + " (" + finalGoingdata.data[ONEWAYcorrectdatas[i]].itineraries[0].segments[0].departure.iataCode + ")";
+            arrivalcity.textContent = arrivalcityname + " (" + finalGoingdata.data[ONEWAYcorrectdatas[i]].itineraries[0].segments[0].arrival.iataCode + ")";
+            DEtime.textContent = finalGoingdata.data[ONEWAYcorrectdatas[i]].itineraries[0].segments[0].departure.at;
+            ARtime.textContent = finalGoingdata.data[ONEWAYcorrectdatas[i]].itineraries[0].segments[0].arrival.at;
+            flightclass.textContent = finalGoingdata.data[ONEWAYcorrectdatas[i]].travelerPricings[0].fareDetailsBySegment[0].cabin;
+            let AUDprice = currencydata.rates.AUD * finalGoingdata.data[ONEWAYcorrectdatas[i]].price.total;
             price.textContent = AUDprice.toFixed(2) + " AUD";
             passenager.textContent = PASSENAGERvalue;
 
