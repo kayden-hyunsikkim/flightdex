@@ -191,6 +191,7 @@ function onewayDATA() {
       console.log(DEiatacode);
       console.log(ARiatacode);
     });
+  setInterval(goingNextpage)
 }
 
 // return flight
