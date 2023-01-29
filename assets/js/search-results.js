@@ -192,7 +192,7 @@ function onewayDATA() {
 
       finalGoingdata = data;
       localStorage.setItem('finalGoingdata', JSON.stringify(finalGoingdata));
-      //setInterval(goingNextpage, 5000);
+      setInterval(goingNextpage, 5000);
     });
     //setInterval(goingNextpage)
 }
