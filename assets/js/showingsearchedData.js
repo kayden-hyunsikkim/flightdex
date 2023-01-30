@@ -5,7 +5,7 @@ const returnh3 = document.querySelector("#location-from");
 const returndiv = document.querySelector("#returndiv");
 
 const togodiv = document.querySelector("#togodiv");
-
+const sliderWithValue = document.querySelector("#sliderWithValue");
 
 
 
@@ -28,6 +28,7 @@ let lengthofRightdata = 0;
 let lengthtogoforDELETE = 0;
 let lengthreturnforDELETE = 0;
 let Slidervalue = 0;
+
 
 
 
@@ -453,7 +454,13 @@ function Deletereturnresult() {
 }
 
 function SortingbyPRICEonewaytickets() {
-    console.log("shit");
+    
+    for (i = 0; i < 20; i++) {
+        if(currencydata.rates.AUD * finalGoingdata.data[i].price.total > 1000){
+            sliderWithValue.setAttribute("max","10000");
+        }
+        }
+
     ONEWAYcorrectdatas = [];
     console.log(ONEWAYcorrectdatas);
     going.textContent = departurecityname + " (" + finalGoingdata.data[0].itineraries[0].segments[0].departure.iataCode + ")" + " ----> " + arrivalcityname + " (" + finalGoingdata.data[0].itineraries[0].segments[0].arrival.iataCode + ")";
@@ -549,7 +556,14 @@ function SortingbyPRICEonewaytickets() {
     }
 }
 function SortingbyPRICEreturntickets() {
-    console.log("fuck");
+    
+        
+    for (i = 0; i < 20; i++) {
+        if(currencydata.rates.AUD * finalGoingdata.data[i].price.total > 1000 || currencydata.rates.AUD * finalreturndata.data[i].price.total > 1000){
+            sliderWithValue.setAttribute("max","10000");
+        }
+        }
+
     ONEWAYcorrectdatas = [];
     RETURNcorrectdatas = [];
 
