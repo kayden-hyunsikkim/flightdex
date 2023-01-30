@@ -217,7 +217,7 @@ function returnDATA() {
 
 
 function finalURL() {
-  return Promise.all([DEgetIATAcodeDATA(), ARgetIATAcodeDATA(), makingQueryDATA()]).then(setTimeout(() => { choosingWAY() }, 2500));
+  return Promise.all([DEgetIATAcodeDATA(), ARgetIATAcodeDATA(), makingQueryDATA()]).then(setTimeout(() => { choosingWAY() }, 2000));
 }
 
 // the settimeout has to be used for fetching time of IATA CODES
@@ -225,11 +225,12 @@ function finalURL() {
 function choosingWAY() {
   
   if (ways === "ONEWAY") {
-    Promise.all([onewayDATA()]).then(setTimeout(() => {goingNEXTpage()}, 2000));
+    Promise.all([onewayDATA()]).then(setTimeout(() => {goingNEXTpage()}, 3000));
+;
   }
 
   if (ways === "RETURN") {
-    Promise.all([onewayDATA(),returnDATA()]).then(setTimeout(() => { goingNEXTpage()}, 2000));
+    Promise.all([onewayDATA(),returnDATA()]).then(setTimeout(() => {goingNEXTpage()}, 3000));
   }
 
 }
